@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{session?.Title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf='session'>
+    <ion-card-header>
+      <ion-card-title>
+        {{session.Title}}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Owner: {{session.Owner}}
+      </ion-card-subtitle>
+      <ion-list *ngIf="session.Players.length">
+        Players
+        <ion-item *ngFor="let player of session.Players">
+          {{player}}
+        </ion-item>
+      </ion-list>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Close Date</ion-label>
+        <ion-datetime value={{session.CloseDate.toDate()}} disabled></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Play Date</ion-label>
+        <ion-datetime value={{session.PlayDate.toDate()}} disabled></ion-datetime>
+      </ion-item>
+      <ion-button size="small" (click)='addPlayer()'>Enter Session</ion-button>
+      <ion-button size="small" routerLink="/app/tabs/games/shelf/nielison">Games</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

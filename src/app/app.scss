@@ -1,0 +1,8 @@
+.loading {
+  --spinner-color: blue;
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+    z-index: 999;
+  }
+}

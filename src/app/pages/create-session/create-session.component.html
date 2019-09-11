@@ -1,0 +1,32 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>
+      Create Session
+    </ion-title>
+
+
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form (ngSubmit)="CreateRecord()">
+    <ion-item-divider></ion-item-divider>
+    <ion-item>
+      <ion-input placeholder="Enter Title" [(ngModel)]="session.title" name='title'></ion-input>
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+    <ion-item>
+      <ion-label>Play Date</ion-label>
+      <ion-datetime value="playDate" [(ngModel)]="session.playdate" name='playdate'></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Close Table Date</ion-label>
+      <ion-datetime [(ngModel)]="closeDate" value="session.closedate" name='closedate'>
+      </ion-datetime>
+    </ion-item>
+    <ion-button type="submit" block [disabled]="session.closedate && session.playdate && session.title">
+      <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
+      &nbsp;Create Session
+    </ion-button>
+  </form>
+</ion-content>

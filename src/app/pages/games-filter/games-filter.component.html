@@ -1,0 +1,64 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button *ngIf="ios" (click)="dismiss()">Cancel</ion-button>
+      <ion-button *ngIf="!ios" (click)="selectAll(false)">Reset</ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      Filter Games
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="applyFilters()" strong>Done</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <ion-list [lines]="ios ? 'inset' : 'full'">
+    <ion-item submenu-item *ngFor="let type of filters.type">
+      <ion-label>{{type.value}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="type.isChecked"></ion-checkbox>
+    </ion-item>
+    <ion-item>Max Players:
+      <ion-range [(ngModel)]="filters.maxPlayers" min="1" max="16" color="secondary" step="1">
+        <ion-label slot="end">{{filters.maxPlayers}}</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item>Max Playtime:
+      <ion-range [(ngModel)]="filters.playtime" min="5" max="900" color="secondary" step="5">
+        <ion-label slot="end">{{filters.playtime}} min</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-item (click)="menuSubCategoryHandler()">Categories</ion-item>
+    <ion-list *ngIf="showSubCategoryMenu">
+      <ion-item submenu-item *ngFor="let category of filters.categories">
+        <ion-label>{{category.value}}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="category.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-item (click)="menuSubMechanicHandler()">Mechanics</ion-item>
+    <ion-list *ngIf="showSubMechanicMenu">
+      <ion-item submenu-item *ngFor="let mechanic of filters.mechanics">
+        <ion-label>{{mechanic.value}}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="mechanic.isChecked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer translucent *ngIf="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="selectAll(false)">Deselect All</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="selectAll(true)">Select All</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+      <ion-segment-button value="all">
+        OPEN
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        CLOSED
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        FINISHED
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="presentFilter()">
+        <ion-icon slot="icon-only" name="options"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="Search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let session of sessions">
+      <ion-item routerLink="/app/tabs/sessions/{{session.id}}">
+        <ion-label>
+          <ion-text color="primary">
+            <h3>{{session.Title}}</h3>
+          </ion-text>
+
+          <ion-text color="medium">
+            {{session.CloseDate.toDate() }}
+          </ion-text>
+        </ion-label>
+
+        <ion-text *ngIf="session.Players">{{session.Players.length + 1}}</ion-text>
+
+
+        <ion-icon name="people" slot="end" size="large"></ion-icon>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+          Favorite
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')"
+          *ngIf="segment === 'favorites'">
+          Remove
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-list-header *ngIf='!sessions'>
+    No Sessions Found
+  </ion-list-header>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button (click)="presentFilter()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+</ion-content>

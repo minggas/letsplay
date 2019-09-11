@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="defaultHref"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Game Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="game">
+    <ion-card-header>
+      <ion-card-title>
+        {{ game.title }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ game.designers.join(', ')}}
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        {{ game.yearpublished}}
+      </ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content text-center>
+      <img [src]="game.thumbnail" class="info-img" />
+      {{ game.description }}
+
+      <ion-item lines="none">
+        <ion-icon name="people" slot="start"></ion-icon>
+        <ion-label>Players: {{game.minplayers}} - {{ game.maxplayers }}</ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="time" slot="start"></ion-icon>
+        <ion-label text-wrap>Playing Time: {{ game.maxplaytime }} mins</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        <ion-label text-wrap>Min Age: {{ game.minage }} years</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="clipboard" slot="start"></ion-icon>
+        <ion-label text-wrap>Categories: {{ game.categories.join(', ') }} mins</ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-icon name="cog" slot="start"></ion-icon>
+        <ion-label text-wrap>Mechanics: {{ game.mechanics.join(', ') }} mins</ion-label>
+      </ion-item>
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
